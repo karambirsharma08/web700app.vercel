@@ -10,6 +10,7 @@
   "description": "",
   "dependencies": {
     "express": "^4.21.1",
-    "modules": "^0.4.0"
+    "modules": "^0.4.0",
+    "vercel": "^37.14.0"
   }
 }
