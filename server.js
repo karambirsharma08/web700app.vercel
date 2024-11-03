@@ -143,3 +143,5 @@ collegeData.initialize()
     .catch((err) => {
         console.log("Failed to initialize data: " + err);
     });
+
+module.exports = app;
