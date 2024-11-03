@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "Karam",
   "license": "ISC",
   "description": "",
   "dependencies": {
     "express": "^4.21.1",
-    "modules": "^0.4.0",
-    "vercel": "^37.14.0"
+    "modules": "^0.4.0"
+  }, 
+  "engines": {
+    "node": "20.x"   
   }
 }
