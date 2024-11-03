@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>WEB700</title>
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/theme.css">
+	</head>
+
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="#">Karambir Sharma</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="/htmlDemo">Html Demo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/students/add">Add Student</a></li>
+                </ul>
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link" href="/students">Students</a></li>
+					<li class="nav-item"><a class="nav-link" href="/tas">Teaching Assistants</a></li>
+					<li class="nav-item"><a class="nav-link" href="/courses">Courses</a></li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="container">
+			<div class="row">
+				<main class="col-md-12">
+                    <h2>Tables</h2>
+                    <h4>1. Result</h4>
+                    <table class="table">
+                        <caption>This table displays the marks obtained by a student in two different courses. The student has scored 95 in both WEB700 and ABC709 courses. The table also calculates the total marks obtained, which sums up to 190. The table structure includes serial numbers, course names, and the corresponding marks.</caption>
+                        <thead>
+                            <tr>
+                                <th>S.N.</th>
+                                <th>Course</th>
+                                <th>Marks Obtained</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>WEB700</td>
+                                <td>95</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>ABC709</td>
+                                <td>95</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">Total</td>
+                                <td>190</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    
+                    <h4>2. Vehicles Lists</h4>
+                    <table class="table">
+                        <caption>This table lists two motorcycle models along with their prices. The first motorcycle is the TIGER 1200 RALLY EXPLORER, priced at $29,295.00, and the second is the Royal Enfield Classic 350, priced at $4,500.00. The total cost for both motorcycles is $33,795.00. </caption>
+                        <thead>
+                            <tr>
+                                <th>S.N.</th>
+                                <th>Name</th>
+                                <th>Model</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="2">1</td>
+                                <td rowspan="2">Motorcycles</td>
+                                <td>TIGER 1200 RALLY EXPLORER</td>
+                                <td>$29,295.00</td>
+                            </tr>
+                            <tr>
+                                
+                                <td>Royal Enfield Classic 350</td>
+                                <td>$4,500.00</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3">Total cost</td>
+                                <td>$33,795.00</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+    
+                    <h2>Category of food items</h2>
+                    <ul>
+                        <li>Vegetables</li>
+                        <li>Fruits
+                            <ul>
+                                <li>Apple</li>
+                                <li>Mango</li>
+                            </ul>
+                        </li>
+                        <li>Dairy Products</li>
+                    </ul>
+                    <caption>This is list of food items</caption><br><br>
+                    
+                    
+                    <h2>Images</h2>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Richard_olson_racing_driver_2023_gellerasen.jpg/640px-Richard_olson_racing_driver_2023_gellerasen.jpg" alt="RaceCar1" class="img-fluid rounded">
+                            </div>
+                            <div class="col-md-4">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Gulf_Racing_Porsche_911_RSR_Wainwright_Silverstone_2018.jpg/640px-Gulf_Racing_Porsche_911_RSR_Wainwright_Silverstone_2018.jpg" alt="RaceCar2" class="img-fluid rounded">
+                            </div>
+                            <div class="col-md-4">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Adam_Simmons%2C_Swaffham_Raceway%2C_2017-03-11.JPG/640px-Adam_Simmons%2C_Swaffham_Raceway_2017-03-11.JPG" alt="RaceCar3" class="img-fluid rounded">
+                            </div>
+                        </div>
+                    </div>
+                    <caption>The images displayed above showcase three different racing cars from various motorsport events. These cars are notable for their impressive speed and performance in the racing world.</caption>
+                    <br>
+                    <br>
+                    <h2>Audio</h2>
+                    <audio controls>
+                        <source src="https://pat-crawford-sdds.netlify.app/shared/fall-2021/web700/A3/sample-audio.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio><br>
+                    <caption>This is a sample music.</caption>
+                    <br>    
+                    <br>
+                    <h2>Video</h2>
+                    <video controls>
+                        <source src="https://pat-crawford-sdds.netlify.app/shared/fall-2021/web700/A3/sample-video.mp4" type="video/mp4">
+                        Your browser does not support the video element.
+                    </video><br>
+                    <caption>This is a sample video file.</caption>
+                </main>
+			</div>
+		</div>
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	</body>
+</html>

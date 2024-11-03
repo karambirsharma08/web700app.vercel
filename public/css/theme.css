@@ -1,0 +1,96 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@700&display=swap');
+
+/* Apply font to body */
+body, html {
+    font-family: 'Open Sans', sans-serif;
+    height: 100%;
+    background: linear-gradient(135deg, rgb(189, 189, 189), rgb(108, 167, 190));
+    overflow: auto;
+}
+
+/* Navigation Bar */
+.bg-light {
+    background-color: #05445E !important;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Navigation Brand */
+.navbar-brand {
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #4A90E2 !important;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+/* Navigation Links */
+.nav-link {
+    color: #b2e5f1 !important;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+/* Hover effect for nav-link */
+.nav-link:hover {
+    color: #FF6347 !important; /* Tomato color for hover */
+}
+
+/* Active Navbar Link */
+.nav-item.active .nav-link {
+    color: #FFFFFF !important;
+}
+
+/* Navbar Brand Hover */
+.navbar-light .navbar-brand:hover, 
+.navbar-light .navbar-brand:focus {
+    color: #75E6DA !important;
+    text-decoration: none;
+}
+
+/* Styling the Primary Button */
+.btn-primary {
+    background: linear-gradient(45deg, #4CAF50, #81C784);
+    color: white;
+    border: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(45deg, #388E3C, #66BB6A);
+    color: #fff;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+/* Odd Table Rows */
+table tr:nth-child(odd) td {
+    background-color: #7facac;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: #333;
+    font-family: 'Open Sans Condensed', sans-serif;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Fieldset Legends */
+legend {
+    padding: 8px 16px;
+    color: #333;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    font-size: 1.2em;
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+/* Main Content Styling */
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    margin-top: 20px;
+}
