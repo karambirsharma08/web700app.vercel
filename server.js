@@ -17,7 +17,7 @@ const path = require("path");
 const collegeData = require("./modules/collegeData");
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'));
 
 
 
