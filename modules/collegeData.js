@@ -1,125 +1,200 @@
-const fs = require('fs');
+const Sequelize = require('sequelize');
 
-// Define the Data class
-class Data {
-    constructor(students, courses) {
-        this.students = students;
-        this.courses = courses;
-    }
-}
+// Configure Sequelize with PostgreSQL database
+const sequelize = new Sequelize('neondb', 'neondb_owner', 'KJtChsd4Q0vz', {
+    host: 'ep-green-bread-a57289eo.us-east-2.aws.neon.tech',
+    dialect: 'postgres',
+    port: 5432,
+    dialectOptions: {
+        ssl: { rejectUnauthorized: false },
+    },
+    query: { raw: true },
+});
 
-// Declare the dataCollection variable
-let dataCollection = null;
 
-// Function to initialize the data
+// Define the Student model
+const Student = sequelize.define('Student', {
+    studentNum: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
+    firstName: Sequelize.STRING,
+    lastName: Sequelize.STRING,
+    email: Sequelize.STRING,
+    addressStreet: Sequelize.STRING,
+    addressCity: Sequelize.STRING,
+    addressProvince: Sequelize.STRING,
+    TA: Sequelize.BOOLEAN,
+    status: Sequelize.STRING,
+    course: Sequelize.INTEGER,
+});
+
+// Define the Course model
+const Course = sequelize.define('Course', {
+    courseId: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+    },
+    courseCode: Sequelize.STRING,
+    courseDescription: Sequelize.STRING,
+});
+
+// Define relationships
+Course.hasMany(Student, { foreignKey: 'course' });
+
+// Function to initialize the database
 function initialize() {
     return new Promise((resolve, reject) => {
-        // Read students.json file
-        fs.readFile('./data/students.json', 'utf8', (err, studentData) => {
-            if (err) {
-                reject("unable to read students.json");
-                return;
-            }
-
-            // Parse student data
-            let students = JSON.parse(studentData);
-
-            // Read courses.json file after reading students.json
-            fs.readFile('./data/courses.json', 'utf8', (err, courseData) => {
-                if (err) {
-                    reject("unable to read courses.json");
-                    return;
-                }
-
-                // Parse course data
-                let courses = JSON.parse(courseData);
-
-                // Create a new instance of Data
-                dataCollection = new Data(students, courses);
-
-                // Resolve the promise when both files are successfully read
-                resolve();
-            });
-        });
+        sequelize
+            .sync()
+            .then(() => resolve())
+            .catch((err) => reject(`Unable to sync the database: ${err}`));
     });
 }
 
 // Function to get all students
 function getAllStudents() {
     return new Promise((resolve, reject) => {
-        if (dataCollection.students.length > 0) {
-            resolve(dataCollection.students);
-        } else {
-            reject("no results returned");
-        }
+        Student.findAll()
+            .then((data) => resolve(data))
+            .catch(() => reject("No results returned"));
     });
 }
 
 // Function to get all Teaching Assistants (TAs)
 function getTAs() {
     return new Promise((resolve, reject) => {
-        const TAs = dataCollection.students.filter(student => student.TA === true);
-        if (TAs.length > 0) {
-            resolve(TAs);
-        } else {
-            reject("no results returned");
-        }
+        Student.findAll({ where: { TA: true } })
+            .then((data) => resolve(data))
+            .catch(() => reject("No results returned"));
     });
 }
 
 // Function to get all courses
 function getCourses() {
     return new Promise((resolve, reject) => {
-        if (dataCollection.courses.length > 0) {
-            resolve(dataCollection.courses);
-        } else {
-            reject("no results returned");
-        }
+        Course.findAll()
+            .then((data) => resolve(data))
+            .catch(() => reject("No results returned"));
     });
 }
-
 
 // Function to get students by course
 function getStudentsByCourse(course) {
     return new Promise((resolve, reject) => {
-        const studentsInCourse = dataCollection.students.filter(student => student.course == course);
-        if (studentsInCourse.length > 0) {
-            resolve(studentsInCourse);
-        } else {
-            reject("no results returned");
-        }
+        Student.findAll({ where: { course } })
+            .then((data) => resolve(data))
+            .catch(() => reject("No results returned"));
     });
 }
 
 // Function to get a student by student number
 function getStudentByNum(num) {
     return new Promise((resolve, reject) => {
-        const student = dataCollection.students.find(student => student.studentNum == num);
-        if (student) {
-            resolve(student);
-        } else {
-            reject("no results returned");
-        }
+        Student.findOne({ where: { studentNum: num } })
+            .then((data) => resolve(data))
+            .catch(() => reject("No results returned"));
     });
 }
 
+// Function to add a new student
 function addStudent(studentData) {
     return new Promise((resolve, reject) => {
-        // Set TA property to false if undefined, otherwise true
+        // Ensure TA is true/false and replace empty strings with null
         studentData.TA = studentData.TA ? true : false;
+        for (const prop in studentData) {
+            if (studentData[prop] === '') studentData[prop] = null;
+        }
 
-        // Set studentNum to be the next available number
-        studentData.studentNum = dataCollection.students.length + 1;
-
-        // Add the studentData to the students array
-        dataCollection.students.push(studentData);
-
-        // Resolve the promise
-        resolve();
+        Student.create(studentData)
+            .then(() => resolve())
+            .catch(() => reject("Unable to create student"));
     });
 }
 
+// Function to update a student
+function updateStudent(studentData) {
+    return new Promise((resolve, reject) => {
+        // Ensure TA is true/false and replace empty strings with null
+        studentData.TA = studentData.TA ? true : false;
+        for (const prop in studentData) {
+            if (studentData[prop] === '') studentData[prop] = null;
+        }
 
+        Student.update(studentData, { where: { studentNum: studentData.studentNum } })
+            .then(() => resolve())
+            .catch(() => reject("Unable to update student"));
+    });
+}
+
+// Function to delete a student by student number
+function deleteStudentByNum(studentNum) {
+    return new Promise((resolve, reject) => {
+        Student.destroy({ where: { studentNum } })
+            .then(() => resolve())
+            .catch(() => reject("Unable to delete student"));
+    });
+}
+
+// Function to add a new course
+function addCourse(courseData) {
+    return new Promise((resolve, reject) => {
+        for (const prop in courseData) {
+            if (courseData[prop] === '') courseData[prop] = null;
+        }
+
+        Course.create(courseData)
+            .then(() => resolve())
+            .catch(() => reject("Unable to create course"));
+    });
+}
+
+// Function to update a course
+function updateCourse(courseData) {
+    return new Promise((resolve, reject) => {
+        for (const prop in courseData) {
+            if (courseData[prop] === '') courseData[prop] = null;
+        }
+
+        Course.update(courseData, { where: { courseId: courseData.courseId } })
+            .then(() => resolve())
+            .catch(() => reject("Unable to update course"));
+    });
+}
+
+// Function to delete a course by ID
+function deleteCourseById(courseId) {
+    return new Promise((resolve, reject) => {
+        Course.destroy({ where: { courseId } })
+            .then(() => resolve())
+            .catch(() => reject("Unable to delete course"));
+    });
+}
+
+// Function to get a course by ID
+function getCourseById(id) {
+    return new Promise((resolve, reject) => {
+        Course.findOne({ where: { courseId: id } })
+            .then((data) => resolve(data))
+            .catch(() => reject("No results returned"));
+    });
+}
 
 // Export the functions
-module.exports = { initialize, getAllStudents, getTAs, getCourses, getStudentsByCourse, getStudentByNum, addStudent };
+module.exports = {
+    initialize,
+    getAllStudents,
+    getTAs,
+    getCourses,
+    getStudentsByCourse,
+    getStudentByNum,
+    addStudent,
+    updateStudent,
+    deleteStudentByNum,
+    addCourse,
+    updateCourse,
+    deleteCourseById,
+    getCourseById,
+};
